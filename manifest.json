@@ -1,6 +1,6 @@
 {
-  "domain": "test",
-  "name": "Test",
+  "domain": "CZCurrencyRates",
+  "name": "CZ Currency Rates",
   "documentation": "",
   "dependencies": [],
   "codeowners": [],
