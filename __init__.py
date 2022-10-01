@@ -1,0 +1,1 @@
+"""Czech Currency Rates"""

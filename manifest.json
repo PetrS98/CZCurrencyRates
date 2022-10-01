@@ -1,0 +1,10 @@
+{
+  "domain": "test",
+  "name": "Test",
+  "documentation": "",
+  "dependencies": [],
+  "codeowners": [],
+  "requirements": ["requests"],
+  "iot_class": "cloud_polling",
+  "version": "0.1.1"
+}
