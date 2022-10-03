@@ -1,4 +1,6 @@
 """Platform for sensor integration."""
+from hashlib import new
+from cv2 import add, line
 from homeassistant.helpers.entity import Entity
 from homeassistant.components.sensor import (
     DEVICE_CLASS_MONETARY,
@@ -42,11 +44,6 @@ class CZCurrencyRates(SensorEntity):
         return self._value
 
     @property
-    def native_unit_of_measurement(self):
-        """Return the native unit of measurement."""
-        return NATIVE_UNIT_OF_MEASUREMENT
-
-    @property
     def device_class(self):
         """Return the device class of the sensor."""
         return DEVICE_CLASS
@@ -57,8 +54,9 @@ class CZCurrencyRates(SensorEntity):
         return self._available
 
     @property
-    def device_state_attributes(self):
-        """Return the state attributes. The format should be a dict with kay/value pairs. """
+    def extra_state_attributes(self):
+        """Return other attributes of the sensor."""
+        return self._attr
 
 
     def update(self):
@@ -83,11 +81,16 @@ class CZCurrencyRates(SensorEntity):
             for item in tst:
                 lineData = item.split("|")
 
+                attr = []
+
+                attr.append(float(lineData[4].replace(",", ".")) / lineData[2])
+
                 if lineData[3] == COURSE_CODE:
                     
                     course = float(lineData[4].replace(",", "."))
 
             self._value = course
+            self._attr = attr
             self._available = True
         except:
           self._available = False
